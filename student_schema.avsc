@@ -1,0 +1,14 @@
+{"namespace": "com.lewis.avro",
+ "type": "record",
+ "name": "Student",
+ "fields": [
+     {"name": "student_id", "type": "int"},
+     {"name": "student_name",  "type": ["string", "null"]},
+     {"name": "course", "type": ["string", "null"]},
+     {"name": "student_phone",  "type": ["string", "null"]},
+     {"name": "student_email",  "type": ["string", "null"]},
+     {"name": "student_address",  "type": ["string", "null"]},
+     {"name": "grade",  "type": ["int", "null"]},
+     {"name": "student_status",  "type": ["string", "null"]}
+ ]
+}
