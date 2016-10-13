@@ -6,6 +6,10 @@
 
 # coding: utf-8
 
+# GRADE CLIENT.py  -This uses the zeroMQ subscribe socket.
+# IP ADDRESS are store in variables. This app subscribes to
+# matching publisher app (avro-gradeserver.py) using the same port number.
+
 # IMPORT STATEMENT
 import sys
 import zmq

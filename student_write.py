@@ -20,12 +20,6 @@ add_socket = context.socket(zmq.REP)
 socket.connect('tcp://10.0.0.12:5551')
 add_socket.bind("tcp://*:5570")
 
-#
-
-#
-# socket_list = context.socket(zmq.REQ)
-# socket_list.connect('tcp://10.0.0.12:5552')
-
 
 schema = avro.schema.parse(open("student_schema.avsc", "rb").read())
 
@@ -185,14 +179,5 @@ def show_students():
 
 get_all_students()
 task_selector()
-
-
-
-
-
-
-
-
-
 
 ## END OF PROGRAM

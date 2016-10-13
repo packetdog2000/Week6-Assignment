@@ -1,8 +1,15 @@
+## Submited by Edwin Garcia
+## Lewis University - MS Data Science
+## Distributed Computing Systems - CPSC - 55500 - 002
+## Professor Manoj Bhat
+## Week 6 Assignment
 
 # coding: utf-8
 
-# In[1]:
-
+# GRADE SERVER  -This uses the zeroMQ publish socket and a request socket.
+# the 2 ports are store in variables port and add_port. This app requests from
+# matching replysocket in the AVRO app (student_write.py) using the same port number.
+# This app also publishes to port variable. The subribers filters published messages.
 #
 #   GRADE SERVER
 #   Binds PUB socket to tcp://*:5557
@@ -39,28 +46,12 @@ total_students = 6 # TOTAL STUDENTS IN THE JSON ARRAY
 student_arr = []
 
 # METHODS
-def add_student(obj):
-    ## ADDS A RECORD TO THE ARRAY,
-    ## THEN THE ARRAY IS LOOPED THROUGH AND AVRO FILE IS REFRESHED.
-    ## INPUT PROMPTS THE USER TO ENTER FIELDS
-    print "Creating a student...\n\n"
-    student_id = len(student_arr) # length of array used as sequntial student id
-    # student_arr.append(obj)
-    # print (obj)
-    print obj
-    print eval(obj)
-    # writer = DataFileWriter(open("student_bin.avro", "wb"), DatumWriter(), schema)
-    # for s in student_arr:
-    #     writer.append(s)
-    # writer.close()
-    # add_socket.send("received new student")
-
 def get_all_students():
     print ("\nAVRO SERVER STUDENT REGISTRAR SERVICE RUNNING...")
     # msg = socket.recv() # PARAM RECEIVED
     # socket.send(msg) # PARAM SENT BACK
 
-    ## GETS THE LIST OF STUDENTS IN THE AVRO FILE
+    ## GETS THE LIST OF STUDENTS FROM THE AVRO FILE
     ## IT FIRST READS THE AVRO FILE IF IT EXISTS,
     ## THEN, THE RECORDS ARE WRITTEN TO THE 'student_arr' ARRAY.
     ## RECORDS WITH 'Inactive' STATUS ARE FILTERED OUT FROM THE DISPLAY
@@ -71,22 +62,15 @@ def get_all_students():
             if student['student_status']=='Active':
                 print "ID: %s, Name: %s, Course: %s, Grade: %d, Status: %s" %(student['student_id'],student['student_name'],student['course'], student['grade'],student['student_status'])
                 student_arr.append(student)
-
         students.close()
-
         return student_arr
-
-        # print "End of List\n"
     else:
         return "false"
 
 
 print("PUBLISHING GRADES >>>")
-
 print("\rGenerating random grades every %.f seconds" % (seconds))
 
-
-# In[ ]:
 
 ### CREATE CONTEXT, SOCKETS THEN BIND TO PORT
 context = zmq.Context()
@@ -114,13 +98,4 @@ while True:
 
     add_socket.send('listening for new student...')
     new_student = add_socket.recv()
-    print new_student
-
-    # if new_student:
-    #     add_student(new_student)
-    #     del new_student
-        # add_socket.send('added student')
     time.sleep(seconds)
-
-
-# In[ ]:
